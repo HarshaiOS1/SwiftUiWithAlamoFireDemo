@@ -17,7 +17,6 @@
 		1D8327EC2BB5ACAF00284E8A /* ContentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8327EB2BB5ACAF00284E8A /* ContentViewViewModel.swift */; };
 		1D8327EE2BB5ACFD00284E8A /* ApplianceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8327ED2BB5ACFD00284E8A /* ApplianceModel.swift */; };
 		1D8327F12BB5AF6F00284E8A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8327F02BB5AF6F00284E8A /* Alamofire */; };
-		1D8327F32BB5AF6F00284E8A /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8327F22BB5AF6F00284E8A /* AlamofireDynamic */; };
 		1D8327F92BB5AFE500284E8A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8327F82BB5AFE500284E8A /* NetworkManager.swift */; };
 		1D8327FC2BB5B02100284E8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8327FB2BB5B02100284E8A /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D8327F12BB5AF6F00284E8A /* Alamofire in Frameworks */,
-				1D8327F32BB5AF6F00284E8A /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +199,6 @@
 			name = DemoAlamofireWithAsyncAwait;
 			packageProductDependencies = (
 				1D8327F02BB5AF6F00284E8A /* Alamofire */,
-				1D8327F22BB5AF6F00284E8A /* AlamofireDynamic */,
 			);
 			productName = DemoAlamofireWithAsyncAwait;
 			productReference = 1D8327BE2BB5AC6200284E8A /* DemoAlamofireWithAsyncAwait.app */;
@@ -672,11 +669,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D8327EF2BB5AF6F00284E8A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		1D8327F22BB5AF6F00284E8A /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D8327EF2BB5AF6F00284E8A /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
