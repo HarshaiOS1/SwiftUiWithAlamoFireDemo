@@ -11,11 +11,11 @@ class ContentViewViewModel: ObservableObject {
     @MainActor @Published var errorMessage = ""
     @MainActor @Published var appliances: [ApplianceModel] = []
     
-    func fetchAppliance(size: Int) async {
+    func fetchGoogleResult(searchText: String) async {
         await MainActor.run {
             self.errorMessage = ""
         }
-        let urlPath = String(format: Constants.baseUrl + Services.getAppliance, size)
+        let urlPath = String(format: Constants.baseUrl + Services.getAppliance, 4)
         if let res = await AppliancesAPI.getAppliances(url: urlPath) {
             await MainActor.run {
                 self.appliances = res
@@ -32,10 +32,7 @@ struct AppliancesAPI {
     static func getAppliances(url: String) async -> [ApplianceModel]? {
         do {
             let data = try await NetworkManager.shared.get(url: url, parameters: nil)
-//            let result = try JSONSerialization.jsonObject(with: data) as? [ApplianceModel]
-            
             let result = try JSONDecoder().decode([ApplianceModel].self, from: data)
-            
             return result
         } catch let error {
             print(error.localizedDescription)
