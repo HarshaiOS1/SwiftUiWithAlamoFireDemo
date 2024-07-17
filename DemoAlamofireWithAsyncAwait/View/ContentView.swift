@@ -8,39 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @StateObject private var viewModel = ContentViewViewModel(applianceService: AppliancesAPI())
+    @State private var searchText = ""
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
             if viewModel.errorMessage != "" {
                 Text(viewModel.errorMessage)
+                
             }
-            Button("Fetch") {
-                Task {
-                    await viewModel.fetchAppliance(size:4)
+            NavigationStack {
+                List {
+                    ForEach(viewModel.appliances,id: \.id) { item in
+                        Text("\(item.brand) - \(item.equipment)")
+                    }
                 }
+                .listStyle(.inset)
             }
-            .frame(width: 80, height: 40)
-            .border(.blue, width: 1)
-            .cornerRadius(3.0)
-            .padding()
-            List {
-                ForEach(viewModel.appliances,id: \.id) { item in
-                    Text("\(item.brand) - \(item.equipment)")
-                }
-            }
-            .listStyle(.inset)
+//            FIX here 
+            
+//            .searchable(text: $searchText) {
+//                print($searchText)
+//                if $searchText.count > 3 {
+//                    await viewModel.fetchGoogleResult(searchText: searchText)
+//                }
+//                
+//            }
         }
         .padding()
-        .onAppear {
-            Task {
-                await viewModel.fetchAppliance(size: 4)
-            }
-        }
     }
 }
 

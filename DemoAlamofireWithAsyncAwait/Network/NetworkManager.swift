@@ -22,14 +22,16 @@ actor NetworkManager: GlobalActor {
                     case let .success(data):
                         continuation.resume(returning: data)
                     case let .failure(error):
-                        continuation.resume(throwing: self.handleError(error: error) as! Never)
+                        if let errerror = self.handleError(error: error) as? Never {
+                            continuation.resume(throwing: errerror)
+                        }
                     }
                 }
         }
     }
     
     //TODO: handle other errors
-    private func handleError(error: AFError) -> Error {
+    private func handleError(error: AFError) -> Error? {
         if let underlyingError = error.underlyingError {
             let nserror = underlyingError as NSError
             let code = nserror.code
