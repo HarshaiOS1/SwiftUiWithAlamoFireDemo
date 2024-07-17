@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoAlamofireWithAsyncAwaitApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ContentViewViewModel(applianceService: AppliancesAPI()))
         }
     }
 }

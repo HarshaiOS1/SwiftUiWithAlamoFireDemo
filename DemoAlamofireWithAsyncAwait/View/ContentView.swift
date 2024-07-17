@@ -8,37 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = ContentViewViewModel(applianceService: AppliancesAPI())
-    @State private var searchText = ""
+    @ObservedObject private var viewModel: ContentViewViewModel
+    
+    init(viewModel: ContentViewViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack(spacing: 10) {
             if viewModel.errorMessage != "" {
                 Text(viewModel.errorMessage)
-                
             }
-            NavigationStack {
-                List {
-                    ForEach(viewModel.appliances,id: \.id) { item in
+            List {
+                ForEach(viewModel.appliances,id: \.id) { item in
+                    HStack {
                         Text("\(item.brand) - \(item.equipment)")
+                        Spacer()
+                        Image(systemName: "chevron.right")
                     }
                 }
-                .listStyle(.inset)
             }
-//            FIX here 
-            
-//            .searchable(text: $searchText) {
-//                print($searchText)
-//                if $searchText.count > 3 {
-//                    await viewModel.fetchGoogleResult(searchText: searchText)
-//                }
-//                
-//            }
+            .listStyle(.inset)
+            Button("Fetch New deals") {
+                Task {
+                    await viewModel.fetchAppliance(size:8)
+                }
+            }
+            .padding(EdgeInsets(top: 10.0, leading: 10.0, bottom: 10.0, trailing: 10.0))
+            .frame(maxWidth: .infinity)
+            .border(.blue, width: 2)
+            .cornerRadius(4.0)
         }
         .padding()
+        .onAppear {
+            Task {
+                await viewModel.fetchAppliance(size: 8)
+            }
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: ContentViewViewModel(applianceService: AppliancesAPI()))
 }

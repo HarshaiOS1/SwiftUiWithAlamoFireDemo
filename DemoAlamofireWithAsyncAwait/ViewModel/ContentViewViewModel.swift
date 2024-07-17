@@ -33,6 +33,7 @@ class ContentViewViewModel: ObservableObject {
     }
 }
 
+//MARK: Appliance Services
 protocol ApplianceServices {
     func fetchAppliance(url: String) async -> [ApplianceModel]?
 }
