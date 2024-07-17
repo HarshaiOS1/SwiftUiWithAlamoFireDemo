@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel = ContentViewViewModel()
+    @StateObject private var viewModel = ContentViewViewModel(applianceService: AppliancesAPI())
     
     var body: some View {
         VStack(spacing: 10) {
